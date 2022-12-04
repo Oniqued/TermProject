@@ -5,17 +5,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.Socket;
 
-@SuppressWarnings("removal")
-public class KChatClient extends JApplet implements Runnable, ActionListener {
+@SuppressWarnings("removal") //JApplet은 더이상 지원하지 않음 >> Warning을 무시 
+public class CarTalkClient extends JApplet implements Runnable, ActionListener { //Thread, ActionListener의 인터페이스를 참조
     DataInputStream  is;		// stream
     DataOutputStream  os;		// stream
-    JTextField login, car, typein;		// for text input
-    JTextArea ta;			// for text output
-    //   Cvas cvas;			// for sketching
-    JPanel portal,chatroom;		// two cards
-    CardLayout cardm;		// card layout manager
-    String myname;
+    JTextField login, car, typein;		// 텍스트 입력을 위한 변수
+    JTextArea ta;			// 텍스트 출력을 위한 변수
+    JPanel portal,chatroom;		// 총 두개의 Panel이 있음. 메인 화면과 채팅방
+    CardLayout cardm;		// 카드 레이아웃 매니저 
+    String myname; //이름을 저장할 공간
 
+    //초기화 하는 과정
     public void init()  {
         setGUIcards();
         setLayout(cardm = new CardLayout());
@@ -24,7 +24,8 @@ public class KChatClient extends JApplet implements Runnable, ActionListener {
         cardm.show (this.getContentPane(), "card-login");	// show the 1st card
     }
 
-    void setGUIcards() {
+    //유저 인터페이스 배치
+    void setGUIcards() { 
         portal = new JPanel(new BorderLayout());		// card-1
         portal.add(new JLabel(new ImageIcon("./img/cartalk.png")), "Center");  // 1-1
         JPanel logpan = new JPanel();
@@ -50,10 +51,8 @@ public class KChatClient extends JApplet implements Runnable, ActionListener {
         //- dual design here - 7+
     }
 
-//+ class Cvas
-
     public static void main(String args[]) {
-        KChatClient chatter = new KChatClient();
+        CarTalkClient chatter = new CarTalkClient(); //
         chatter.init(); //JApplet 함수
         chatter.start(); //JApplet 함수
         JFrame f = new JFrame("Lab XI. CafeGaggle");

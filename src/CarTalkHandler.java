@@ -2,13 +2,13 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
-class KChatHandler extends Thread {
-    protected KChatServer server; //- for accessing vhandler – protected Socket sock;
+class CarTalkHandler extends Thread {
+    protected CarTalkServer server; //- for accessing vhandler – protected Socket sock;
     protected Socket sock;
     protected DataInputStream is;
     protected DataOutputStream os;
 
-    KChatHandler(KChatServer server, Socket sock) throws IOException {
+    CarTalkHandler(CarTalkServer server, Socket sock) throws IOException {
         this.server = server;
         this.sock = sock;
         // create I/O streasm to send & receive messags :
@@ -42,7 +42,7 @@ class KChatHandler extends Thread {
         synchronized (server.vhandler) {
             Enumeration en = server.vhandler.elements(); // ‘순회’ 지원 객체
             while (en.hasMoreElements()) {
-                KChatHandler c = (KChatHandler) en.nextElement();
+                CarTalkHandler c = (CarTalkHandler) en.nextElement();
                 // 각 고객담당 KChatHandler 가 열어 놓은 소켓으로 msg 전달.
                 try {
                     c.os.writeUTF(message);
